@@ -148,8 +148,7 @@ class LibrarySearcher {
             // search 'classpath:'-uri on LOAD_PATH
             if (baseName.startsWith("classpath:")) baseName = baseName.replaceFirst("^classpath:/?", "");
             for (IRubyObject loadPathEntry : loadService.loadPath.toJavaArray()) {
-                String loadPathString = loadPathEntry.convertToString().asJavaString();
-                FoundLibrary library = findFileResourceWithLoadPath(baseName, suffix,  getPath(loadPathEntry));
+                FoundLibrary library = findFileResourceWithLoadPath(baseName, suffix, getPath(loadPathEntry));
                 if (library != null) {
                   return library;
                 }
@@ -277,8 +276,9 @@ class LibrarySearcher {
             try {
                 URL url;
                 if (location.startsWith(URLResource.URI)){
+                    url = runtime.getJRubyClassLoader().addURLNoIndex(URLResource.getResourceURL(location));
+                    runtime.getLoadService().addPath("jar:"+ url.toString() + "!/");
                     url = null;
-                    runtime.getJRubyClassLoader().addURLNoIndex(URLResource.getResourceURL(location));
                 }
                 else {
                     // the JRubyClassLoaderResource
@@ -297,7 +297,9 @@ class LibrarySearcher {
                     }
                 }
                 if ( url != null ) {
-                    runtime.getJRubyClassLoader().addURLNoIndex(url);
+                    url = runtime.getJRubyClassLoader().addURLNoIndex(url);
+                    String path = (url.getProtocol() == "jar" ? url.toString() : "jar:" + url.toString()) + "!/";
+                    runtime.getLoadService().addPath(path);
                 }
             } catch (MalformedURLException badUrl) {
                 runtime.newIOErrorFromException(badUrl);
