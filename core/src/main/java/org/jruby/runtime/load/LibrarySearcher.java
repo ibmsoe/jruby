@@ -140,9 +140,12 @@ class LibrarySearcher {
         }
 
         try {
-            FoundLibrary lib = findFileResourceWithLoadPath(baseName, suffix, null);
-            if (lib != null) {
-                return lib;
+            // TODO move this into the LibrarySearcher.Ruby18
+            if (runtime.is1_8()) {
+                FoundLibrary lib = findFileResourceWithLoadPath(baseName, suffix, null);
+                if (lib != null) {
+                    return lib;
+                }
             }
 
             // search 'classpath:'-uri on LOAD_PATH
@@ -297,6 +300,7 @@ class LibrarySearcher {
                     }
                 }
                 if ( url != null ) {
+                    // TODO share this code with RubyClassPathVariable
                     url = runtime.getJRubyClassLoader().addURLNoIndex(url);
                     String path = (url.getProtocol() == "jar" ? url.toString() : "jar:" + url.toString()) + "!/";
                     runtime.getLoadService().addPath(path);
