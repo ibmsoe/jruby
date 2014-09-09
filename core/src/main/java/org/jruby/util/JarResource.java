@@ -16,9 +16,7 @@ abstract class JarResource implements FileResource {
 
     public static JarResource create(String pathname) {
         if (!pathname.contains("!")) return null;  // Optimization: no ! no jar!
-        // TODO should be possible to remove this if the LOAD_PATH entries would end with "!" instead of "!/"
-        // easy to refactor once travis is green again
-        pathname = pathname.replace("!//", "!/");
+
         Matcher matcher = PREFIX_MATCH.matcher(pathname);
         String sanitized = matcher.matches() ? matcher.group(1) : pathname;
 

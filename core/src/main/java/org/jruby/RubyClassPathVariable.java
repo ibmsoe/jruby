@@ -72,7 +72,7 @@ public class RubyClassPathVariable extends RubyObject {
                 URL url = getURL(ss);
                 // TODO share this code with LibrarySearcher
                 url = getRuntime().getJRubyClassLoader().addURLNoIndex(url);
-                String p = (url.getProtocol() == "jar" ? url.toString() : "jar:" + url.toString()) + "!/";
+                String p = (url.getProtocol() == "jar" ? url.toString() : "jar:" + url.toString()) + "!";
                 getRuntime().getLoadService().addPaths(p);
             } catch (MalformedURLException mue) {
                 throw getRuntime().newArgumentError(mue.getLocalizedMessage());

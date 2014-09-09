@@ -280,7 +280,7 @@ class LibrarySearcher {
                 URL url;
                 if (location.startsWith(URLResource.URI)){
                     url = runtime.getJRubyClassLoader().addURLNoIndex(URLResource.getResourceURL(location));
-                    runtime.getLoadService().addPath("jar:"+ url.toString() + "!/");
+                    runtime.getLoadService().addPath("jar:"+ url.toString() + "!");
                     url = null;
                 }
                 else {
@@ -302,7 +302,7 @@ class LibrarySearcher {
                 if ( url != null ) {
                     // TODO share this code with RubyClassPathVariable
                     url = runtime.getJRubyClassLoader().addURLNoIndex(url);
-                    String path = (url.getProtocol() == "jar" ? url.toString() : "jar:" + url.toString()) + "!/";
+                    String path = (url.getProtocol() == "jar" ? url.toString() : "jar:" + url.toString()) + "!";
                     runtime.getLoadService().addPath(path);
                 }
             } catch (MalformedURLException badUrl) {
