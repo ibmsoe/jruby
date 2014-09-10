@@ -279,7 +279,7 @@ class LibrarySearcher {
             try {
                 URL url;
                 if (location.startsWith(URLResource.URI)){
-                    url = runtime.getJRubyClassLoader().addURLNoIndex(URLResource.getResourceURL(location));
+                    url = runtime.getJRubyClassLoader().addURLNoIndex(URLResource.getResourceURL(runtime, location));
                     runtime.getLoadService().addPath("jar:"+ url.toString() + "!");
                     url = null;
                 }
