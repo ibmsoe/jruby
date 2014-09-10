@@ -33,17 +33,17 @@ public class URLResource implements FileResource {
     private final String pathname;
 
     private final JarFileStat fileStat;
-    private Ruby runtime;
+    private ClassLoader runtime;
 
     URLResource(String uri, URL url, String[] files) {
         this(uri, url, null, null, files);
     }
     
-    URLResource(String uri, Ruby runtime, String pathname, String[] files) {
+    URLResource(String uri, ClassLoader runtime, String pathname, String[] files) {
         this(uri, null, runtime, pathname, files);
     }
     
-    private URLResource(String uri, URL url, Ruby runtime, String pathname, String[] files) {
+    private URLResource(String uri, URL url, ClassLoader runtime, String pathname, String[] files) {
         this.uri = uri;
         this.list = files;
         this.url = url;
@@ -139,7 +139,7 @@ public class URLResource implements FileResource {
         try
         {
             if (pathname != null) {
-                return runtime.getJRubyClassLoader().getParent().getResourceAsStream(pathname);
+                return runtime.getResourceAsStream(pathname);
             }
             return url.openStream();
         }
@@ -168,13 +168,17 @@ public class URLResource implements FileResource {
         ClassLoader cl = runtime == null ? Thread.currentThread().getContextClassLoader() : runtime.getJRubyClassLoader().getParent();
         URL url = cl.getResource(pathname);
         // do not find anything in current directory, i.e. file URIs
+        String[] files;
         if( url != null && url.getProtocol().equals("file") && runtime != null && 
                 url.getFile().equals(runtime.getCurrentDirectory() + "/" + pathname)) { 
             url = null;
+            files = null;
         }
-        String[] files = listClassLoaderFiles(cl, pathname);
+        else {
+            files = listClassLoaderFiles(cl, pathname);
+        }
         return new URLResource(URI_CLASSLOADER + pathname,
-                               runtime,
+                               cl,
                                url == null ? null : pathname,
                                files);
     }
