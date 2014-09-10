@@ -81,7 +81,12 @@ public class JRubyFile extends JavaSecuredFile {
         if (jarResource != null) return jarResource;
 
         if (pathname.contains(":")) { // scheme-oriented resources
-            if (pathname.startsWith("uri:")) return URLResource.create(runtime, pathname);
+            if (pathname.startsWith("uri:")) {
+                FileResource urlResource = URLResource.create(runtime, pathname);
+                // TODO even if URLResource does not exist it should produce the same result
+                // as the RegularFileResource below
+                if (urlResource.exists()) return urlResource;
+            }
 
             if (pathname.startsWith("file:")) {
                 pathname = pathname.substring(5);
