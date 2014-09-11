@@ -97,7 +97,7 @@ public class URLResource implements FileResource {
     @Override
     public boolean canRead()
     {
-        return true;
+        return exists();
     }
 
     @Override
@@ -170,10 +170,15 @@ public class URLResource implements FileResource {
         }
         ClassLoader cl = runtime == null ? Thread.currentThread().getContextClassLoader() : runtime.getJRubyClassLoader().getParent();
         URL url = cl.getResource(pathname);
-        // do not find anything in current directory, i.e. file URIs
         String[] files;
-        if( url != null && url.getProtocol().equals("file") && runtime != null && 
+        // do not find anything in current directory, i.e. file URIs
+        if (url != null && url.getProtocol().equals("file") && runtime != null &&
                 url.getFile().equals(runtime.getCurrentDirectory() + "/" + pathname)) { 
+            url = null;
+            files = null;
+        }
+        // TODO remove this once we do not bundle yaml ruby scripts in jruby.jar anymore
+        else if (url != null && pathname.startsWith( "yaml")) {
             url = null;
             files = null;
         }
