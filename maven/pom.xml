@@ -91,15 +91,15 @@
       <scope>${jar.scope}</scope>
     </dependency>
     <dependency>
-      <groupId>org.jruby.extras</groupId>
+      <groupId>com.github.jnr</groupId>
       <artifactId>jffi</artifactId>
-      <version>1.0.8</version>
+      <version>1.1.0</version>
       <scope>${jar.scope}</scope>
     </dependency>
     <dependency>
-      <groupId>org.jruby.extras</groupId>
+      <groupId>com.github.jnr</groupId>
       <artifactId>jffi</artifactId>
-      <version>1.0.7</version>
+      <version>1.1.0</version>
       <scope>runtime</scope>
       <classifier>native</classifier>
     </dependency>
