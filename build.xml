@@ -355,6 +355,7 @@
         <zipfileset src="${build.lib.dir}/jffi-ppc-AIX.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-ppc-Linux.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-ppc64-Linux.jar"/>
+        <zipfileset src="${build.lib.dir}/jffi-ppc64le-Linux.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-sparc-SunOS.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-sparcv9-SunOS.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-i386-FreeBSD.jar"/>
@@ -456,6 +457,7 @@
         <zipfileset src="${build.lib.dir}/jffi-ppc-AIX.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-ppc-Linux.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-ppc64-Linux.jar"/>
+        <zipfileset src="${build.lib.dir}/jffi-ppc64le-Linux.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-sparc-SunOS.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-sparcv9-SunOS.jar"/>
         <zipfileset src="${build.lib.dir}/jffi-i386-FreeBSD.jar"/>
@@ -615,6 +617,7 @@
       <zipfileset src="${build.lib.dir}/jffi-ppc-AIX.jar"/>
       <zipfileset src="${build.lib.dir}/jffi-ppc-Linux.jar"/>
       <zipfileset src="${build.lib.dir}/jffi-ppc64-Linux.jar"/>
+      <zipfileset src="${build.lib.dir}/jffi-ppc64le-Linux.jar"/>
       <zipfileset src="${build.lib.dir}/jffi-sparc-SunOS.jar"/>
       <zipfileset src="${build.lib.dir}/jffi-sparcv9-SunOS.jar"/>
       <zipfileset src="${build.lib.dir}/jffi-i386-FreeBSD.jar"/>
