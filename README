@@ -60,3 +60,9 @@ Visit http://jruby.org for more information.
 == License
 
 Read the COPYING file.
+
+Building jruby-complete jar in Power
+------------------------------------
+
+cd jruby/maven/jruby-complete
+mvn install
