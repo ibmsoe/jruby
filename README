@@ -61,8 +61,8 @@ Visit http://jruby.org for more information.
 
 Read the COPYING file.
 
-Building jruby-complete jar in Power
+Building jruby-complete jar in PowerPC
 ------------------------------------
-
+git clone https://github.com/ibmsoe/jruby
 cd jruby/maven/jruby-complete
 mvn install
